@@ -1,0 +1,6 @@
+astronova/.env
+astronova/obj/
+astronova/bin/
+.idea/
+AstroNova.sln
+
