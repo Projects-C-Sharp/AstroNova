@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using astronova.Data;
 
@@ -11,9 +12,11 @@ using astronova.Data;
 namespace astronova.Migrations
 {
     [DbContext(typeof(AstronovaDbContext))]
-    partial class AstronovaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260415003903_AstronautUpdated")]
+    partial class AstronautUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
