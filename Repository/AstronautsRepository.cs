@@ -20,7 +20,7 @@ public class AstronautsRepository
     }
 
     // Get By ID
-    public Astronauts? GetAstronautsById(int id)
+    public Astronauts? GetAstronautById(int id)
     {
         return _context.Astronauts.FirstOrDefault(a => a.Id == id);
     }
@@ -40,24 +40,33 @@ public class AstronautsRepository
     }
     
     // Update
-    public void UpdateAstronaut(Astronauts astronaut)
+    public void UpdateAstronaut(int id, Astronauts astronaut)
     {
-        try
-        {
-            _context.Astronauts.Update(astronaut);
-            _context.SaveChanges();
+        var existing = GetAstronautById(id);
+        if (existing == null) return;
 
-        }
-        catch (DbUpdateException ex)
-        {
-            throw new Exception(ex.InnerException?.Message ?? ex.Message);
-        }
+        if (astronaut.Name != null)
+            existing.Name = astronaut.Name;
+
+        if (astronaut.LastName != null)
+            existing.LastName = astronaut.LastName;
+
+        if (astronaut.HoursExperience.HasValue)
+            existing.HoursExperience = astronaut.HoursExperience;
+        
+        if (astronaut.Range != default)
+            existing.Range = astronaut.Range;
+        
+        if (astronaut.Missions != null)
+            existing.Missions = astronaut.Missions;
+
+        _context.SaveChanges();
     }
     
     // Delete By ID
     public bool DeleteAstronaut(int id)
     {
-        var astronaut = GetAstronautsById(id);
+        var astronaut = GetAstronautById(id);
 
         if (astronaut == null)
             return false;
